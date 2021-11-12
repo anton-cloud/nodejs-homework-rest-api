@@ -1,6 +1,7 @@
 const express = require("express");
 const Joi = require("joi");
 const router = express.Router();
+
 const { listContacts, getContactById, removeContact, addContact, updateContact } = require("../../model");
 
 const joinContactSchema = Joi.object({
