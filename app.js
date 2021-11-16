@@ -7,6 +7,8 @@ const contactsRouter = require("./routes/api/contacts");
 
 const app = express();
 
+require("dotenv").config();
+
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
@@ -20,27 +22,8 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message });
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
 });
-
-const { Schema, model } = mongoose;
-const contactSchema = Schema({
-  name: {
-    type: String,
-    required: [true, "Set name for contact"]
-  },
-  email: {
-    type: String
-  },
-  phone: {
-    type: String
-  },
-  favorite: {
-    type: Boolean,
-    default: false
-  }
-});
-
-const Contact = model("contact", contactSchema);
 
 module.exports = app;
