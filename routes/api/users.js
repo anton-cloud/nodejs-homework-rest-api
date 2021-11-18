@@ -10,8 +10,8 @@ router.post("/signup", validation(joinUserSchema), controllerWrapper(ctrl.signup
 
 router.post("/login", validation(joinUserSchema), controllerWrapper(ctrl.login));
 
-router.get("/current", authenticate, validation(joinUserSchema), controllerWrapper(ctrl.current));
+router.post("/logout", authenticate, controllerWrapper(ctrl.logout));
 
-// router.get("/logout", controllerWrapper(ctrl.logout));
+router.get("/current", authenticate, validation(joinUserSchema), controllerWrapper(ctrl.current));
 
 module.exports = router;

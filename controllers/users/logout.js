@@ -1,9 +1,9 @@
-// const logout = require("./logout.js");
-// const login = require("./login");
-const signup = require("./signup");
+const { User } = require("../../models");
 
-module.exports = {
-  //   logout,
-  //   login,
-  signup
+const logout = async (req, res) => {
+  const { _id } = req.user;
+  await User.findByIdAndUpdate(_id, { token: null });
+  res.status(204).json();
 };
+
+module.exports = logout;
