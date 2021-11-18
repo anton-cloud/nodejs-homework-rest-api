@@ -1,7 +1,5 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-const { Unauthorized } = require("http-errors");
 const { User } = require("../../models");
 
 require("dotenv").config();
@@ -12,7 +10,9 @@ const login = async (req, res) => {
   const result = await User.findOne({ email });
 
   if (!result || !bcrypt.compareSync(password, result.password)) {
-    throw new Unauthorized("Email or password is wrong");
+    res.status(401).json({
+      message: "Email or password is wrong"
+    });
   }
 
   const payload = {

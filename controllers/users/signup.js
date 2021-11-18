@@ -1,4 +1,3 @@
-const { Conflict } = require("http-errors");
 const { User } = require("../../models");
 const { sendSuccessReq } = require("../../helpers");
 
@@ -8,7 +7,10 @@ const signup = async (req, res) => {
   const { email, password, subscription, token } = req.body;
   const result = await User.findOne({ email });
   if (result) {
-    throw new Conflict("Email in use");
+    res.status(409).json({
+      message: "Email in use"
+    });
+    return;
   }
 
   const newUser = {
@@ -19,7 +21,10 @@ const signup = async (req, res) => {
   };
 
   const addedContact = await User.create(newUser);
-  sendSuccessReq(res, { email: addedContact.email, subscription: addedContact.subscription }, 201);
+  // sendSuccessReq(res, { email: addedContact.email, subscription: addedContact.subscription }, 201);
+  res.status(201).json({
+    user: { email: addedContact.email, subscription: addedContact.subscription }
+  });
 };
 
 module.exports = signup;
