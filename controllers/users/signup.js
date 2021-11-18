@@ -1,5 +1,4 @@
 const { User } = require("../../models");
-const { sendSuccessReq } = require("../../helpers");
 
 const bcrypt = require("bcryptjs");
 
@@ -21,7 +20,6 @@ const signup = async (req, res) => {
   };
 
   const addedContact = await User.create(newUser);
-  // sendSuccessReq(res, { email: addedContact.email, subscription: addedContact.subscription }, 201);
   res.status(201).json({
     user: { email: addedContact.email, subscription: addedContact.subscription }
   });
