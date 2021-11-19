@@ -3,8 +3,6 @@ const multer = require("multer");
 
 const tempDirectory = path.join(__dirname, "../temp");
 
-console.log(tempDirectory);
-
 const multerSetting = multer.diskStorage({
   //куди зберегти
   destination: (req, file, cb) => {

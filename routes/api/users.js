@@ -15,9 +15,11 @@ router.post("/logout", authenticate, controllerWrapper(ctrl.logout));
 router.get("/current", authenticate, validation(joinUserSchema), controllerWrapper(ctrl.current));
 
 // ====================================
-router.post("/avatars", upload.single("photo"), controllerWrapper(ctrl.addAvatar));
+// router.post("/avatars", upload.single("photo"), controllerWrapper(ctrl.addAvatar));
 
-router.get("/avatars", controllerWrapper(ctrl.getAvatar));
+// router.get("/avatars", controllerWrapper(ctrl.getAvatar));
+
+router.patch("/avatars", authenticate, upload.single("avatar"), controllerWrapper(ctrl.updateAvatar));
 // ====================================
 
 module.exports = router;
