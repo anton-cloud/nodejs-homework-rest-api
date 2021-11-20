@@ -5,7 +5,6 @@ const { sendSuccessReq } = require("../../helpers");
 const updateFavorite = async (req, res) => {
   const { contactId } = req.params;
   const { favorite } = req.body;
-  console.log(contactId, favorite);
   const result = await Contact.findByIdAndUpdate(contactId, { favorite }, { new: true });
 
   if (!result) {

@@ -1,4 +1,5 @@
 const Joi = require("joi");
+
 const { Schema, model } = require("mongoose");
 
 const userSchema = Schema(
@@ -20,6 +21,9 @@ const userSchema = Schema(
     token: {
       type: String,
       default: null
+    },
+    avatarURL: {
+      type: String
     }
   },
   { versionKey: false, timestamps: true }
@@ -29,7 +33,8 @@ const joinUserSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().required(),
   subscription: Joi.string(),
-  token: Joi.string()
+  token: Joi.string(),
+  avatarURL: Joi.string()
 });
 
 const User = model("user", userSchema);
