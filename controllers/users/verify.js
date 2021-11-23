@@ -1,10 +1,9 @@
 const { User } = require("../../models");
 
-const verify = async (res, req) => {
-  console.log(res.params);
-  const { verificationToken } = res.params;
-  console.log(verificationToken);
-  const user = await User.findOne({ verificationToken });
+const verify = async (req, res) => {
+  const { verificationToken } = req.params;
+
+  const user = await User.findOne({ verifyToken: verificationToken });
 
   if (!user) {
     res.status(404).json({ message: "User not found" });
@@ -12,7 +11,7 @@ const verify = async (res, req) => {
   }
 
   await User.findByIdAndUpdate(user._id, { verifyToken: null, verify: true });
-  req.json({ message: "Verification successful" });
+  res.json({ message: "Verification successful" });
 };
 
 module.exports = verify;

@@ -29,12 +29,6 @@ const signup = async (req, res) => {
 
   const addedContact = await User.create(newUser);
 
-  // const data = {
-  //   to: email,
-  //   subject: "Подтверджение",
-  //   html: `<a href="http://localhost:3000/api/users/verify/${verifyToken}"
-  //             target="_blank">Click here</a>`
-  // };
   const data = {
     to: email,
     subject: "Подтверджение email при регистрации на сайте localhost:3000",
