@@ -16,4 +16,6 @@ router.get("/current", authenticate, validation(joinUserSchema), controllerWrapp
 
 router.patch("/avatars", authenticate, upload.single("avatar"), controllerWrapper(ctrl.updateAvatar));
 
+router.get("/verify/:verificationToken", controllerWrapper(ctrl.verify));
+
 module.exports = router;
