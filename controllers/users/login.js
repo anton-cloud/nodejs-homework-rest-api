@@ -9,9 +9,9 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const result = await User.findOne({ email });
 
-  if (!result || !bcrypt.compareSync(password, result.password)) {
+  if (!result || !bcrypt.compareSync(password, result.password) || !result.verify) {
     res.status(401).json({
-      message: "Email or password is wrong"
+      message: "Email or password is wrong or email is not verify"
     });
   }
 
