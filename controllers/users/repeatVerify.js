@@ -3,7 +3,6 @@ const { v4 } = require("uuid");
 const { sendEmail } = require("../../helpers");
 
 const repeatVerify = async (req, res) => {
-  console.log(Object.keys(req.body).includes("email"));
   if (!Object.keys(req.body).includes("email")) {
     res.status(400).json({
       message: "missing required field email"
